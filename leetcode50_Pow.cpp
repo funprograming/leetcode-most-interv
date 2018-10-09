@@ -1,4 +1,4 @@
-/* 50. Pow(x, n)
+/* leetcode 50. Pow(x, n)
 
 Implement pow(x, n), which calculates x raised to the power n (xn).
 
@@ -18,7 +18,7 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 Note:
 
 -100.0 < x < 100.0
-n is a 32-bit signed integer, within the range [閳拷231, 231 閳拷 1] 
+n is a 32-bit signed integer, within the range  [?2^31, 2^31 ? 1]
 */
 
 // way 1
@@ -38,10 +38,28 @@ public:
     double myPow(double x, int n) {
         if(n==0) return 1;
         if(n<0){
-            return 1/x*myPow(1/x, -(n+1)); // -(n+1)閬垮厤INT_MAX瓒婇檺
+            return 1/x*myPow(1/x, -(n+1)); // -(n+1)避免INT_MAX越限
         }
         return n%2==0 ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
     }
 };
-
-// way 3
+// way 3 迭代
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if(n==0) return 1;
+        double rst = 1;
+        double t = 1;
+        if(n<0){
+            t = x;
+            n = -(n+1); // -(n+1)避免INT_MAX越限
+            x = 1/x;
+        }
+        while(n>0){
+            if(n&1) rst *= x; //指数中二进制1的个数 x^4 --> x^100b
+            x *= x;
+            n = n>> 1;
+        }
+        return 1/t*rst;
+    }
+};
