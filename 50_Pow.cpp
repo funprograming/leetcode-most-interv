@@ -18,7 +18,7 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
 Note:
 
 -100.0 < x < 100.0
-n is a 32-bit signed integer, within the range [−231, 231 − 1] 
+n is a 32-bit signed integer, within the range [鈭�231, 231 鈭� 1] 
 */
 
 // way 1
@@ -38,9 +38,7 @@ public:
     double myPow(double x, int n) {
         if(n==0) return 1;
         if(n<0){
-            n = -n;
-            x = 1/x;
-            return 1/x*myPow(1/x, -(n+1)) // -(n+1)为了避免int越限
+            return 1/x*myPow(1/x, -(n+1)); // -(n+1)避免INT_MAX越限
         }
         return n%2==0 ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
     }
