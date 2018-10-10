@@ -1,65 +1,46 @@
-/* leetcode 50. Pow(x, n)
+/*
+leetcode 2. Add Two Numbers
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
-Implement pow(x, n), which calculates x raised to the power n (xn).
+Example:
+// æ³¨æ„:ä¸¤ä¸ªé“¾è¡¨çš„é•¿åº¦ä¸ä¸€å®šç­‰é•¿
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
 
-Example 1:
-
-Input: 2.00000, 10
-Output: 1024.00000
-Example 2:
-
-Input: 2.10000, 3
-Output: 9.26100
-Example 3:
-
-Input: 2.00000, -2
-Output: 0.25000
-Explanation: 2-2 = 1/22 = 1/4 = 0.25
-Note:
-
--100.0 < x < 100.0
-n is a 32-bit signed integer, within the range  [?2^31, 2^31 ? 1]
 */
 
-// way 1
-class Solution {
-public:
-    double myPow(double x, int n) {
-        if(n==0) return 1;
-        double t = myPow(x,n/2);
-        if(0 != n%2) return n<0 ? 1/x*t*t : x*t*t;
-        else return t*t;
-    }
-};
 
-// way 2
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    double myPow(double x, int n) {
-        if(n==0) return 1;
-        if(n<0){
-            return 1/x*myPow(1/x, -(n+1)); // -(n+1)±ÜÃâINT_MAXÔ½ÏÞ
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* rst = new ListNode(0);
+        ListNode* rsthead = rst;
+        int sum = 0;
+        while(l1 || l2){
+            sum /=10;
+            if(l1){
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if(l2){
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            rst->next = new ListNode(sum%10);
+            rst = rst->next;
         }
-        return n%2==0 ? myPow(x*x, n/2) : x*myPow(x*x, n/2);
-    }
-};
-// way 3 µü´ú
-class Solution {
-public:
-    double myPow(double x, int n) {
-        if(n==0) return 1;
-        double rst = 1;
-        double t = 1;
-        if(n<0){
-            t = x;
-            n = -(n+1); // -(n+1)±ÜÃâINT_MAXÔ½ÏÞ
-            x = 1/x;
-        }
-        while(n>0){
-            if(n&1) rst *= x; //Ö¸ÊýÖÐ¶þ½øÖÆ1µÄ¸öÊý x^4 --> x^100b
-            x *= x;
-            n = n>> 1;
-        }
-        return 1/t*rst;
+
+        if(sum /=10) rst->next = new ListNode(1);
+        return rsthead->next;
     }
 };
