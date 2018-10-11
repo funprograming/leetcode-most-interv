@@ -36,6 +36,7 @@ public:
                 sum += l2->val;
                 l2 = l2->next;
             }
+            // 最初先创建个表头有利于简便代码操作
             rst->next = new ListNode(sum%10);
             rst = rst->next;
         }
