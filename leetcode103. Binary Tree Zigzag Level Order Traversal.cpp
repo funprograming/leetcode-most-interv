@@ -61,6 +61,58 @@ return its zigzag level order traversal as:
 //     }
 // };
 
+// 同102相似解法
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        if(!root)
+            return result;
+
+        queue<TreeNode*> s;
+        vector<int> level(1);
+        s.push(root);
+        int newlevel = 1;
+        int nextlevel =0;
+        int zigzag = 0;
+        int index = 0;
+        while(!s.empty())
+        {
+            TreeNode* n = s.front();
+            s.pop();
+
+            newlevel--;
+            if(zigzag==1){
+                level[newlevel] =  n->val;
+            }else{
+                level[index++] =  n->val;
+            }
+            if(n->left){
+                s.push(n->left);
+                nextlevel++;
+            }
+            if(n->right){
+                s.push(n->right);
+                nextlevel++;
+            }                
+            
+            if(newlevel==0)
+            {
+                zigzag = 1-zigzag;
+                newlevel = nextlevel;
+                
+                result.push_back(level);
+                level.resize(newlevel);
+                nextlevel = 0;
+                index =0;
+                // level.clear();
+            }
+        }
+        
+        return result;
+    }
+};
+
 class Solution {
 public:
     vector<vector<int> > zigzagLevelOrder(TreeNode* root) {

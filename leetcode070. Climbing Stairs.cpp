@@ -22,9 +22,21 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
  */
 
+// F(1)=1 F(2)=2
+// F(N) = F(N-1)+F(N-2)
 class Solution {
 public:
     int climbStairs(int n) {
-        
+        if(n<=2) return n;
+        int i = 1;
+        int j = 2;
+        int ret;
+        int cnt=1;
+        while(++cnt<n){
+            ret = i+j;
+            i = j;
+            j = ret;
+        }
+        return ret;
     }
 };
