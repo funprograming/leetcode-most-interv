@@ -10,11 +10,23 @@ Follow up:
 
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
  */
-// way 1 divide and conquer 
+// way 1 
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        
+        int max = nums[0];
+        int sum = nums[0];
+        for(int i=1;i<nums.size();++i){
+            // if(sum<0){
+            //     sum=0;
+            // }     
+            // sum+=nums[i];
+            sum = nums[i] + (sum > 0 ? sum : 0);
+            if(sum>max){
+                max = sum;
+            }
+        }
+        return max;
     }
 };
 
@@ -25,7 +37,7 @@ public:
         int sum = nums[0];
         int maxsub = nums[0];
         for(int i=1;i<nums.size();++i){
-            sum = max(sum+nums[i],nums[i]);
+            sum = nums[i] + (sum > 0 ? sum : 0);
             maxsub = max(sum,maxsub);
         }
         return maxsub;

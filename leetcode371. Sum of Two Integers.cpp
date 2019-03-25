@@ -47,7 +47,7 @@ public:
         {
             sum = a ^ b;//calculate sum of a and b without thinking the carry 
             b = (a & b) << 1;//calculate the carry
-            a = sum;//add sum(without carry) and carry
+            a = sum;//不使用加法，只能重复操作
         }
 
         return sum;
