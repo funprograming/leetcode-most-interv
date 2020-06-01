@@ -11,7 +11,8 @@ Example 2:
 Input: [[1,4],[4,5]]
 Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
-NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
+NOTE: input types have been changed on April 15, 2019. Please reset to default 
+code definition to get new method signature.
  */
 
 /**
@@ -26,7 +27,7 @@ NOTE: input types have been changed on April 15, 2019. Please reset to default c
 class Solution {
 public:
     vector<Interval> merge(vector<Interval>& intervals) {
-        if (!intervals.size()) return vector<Interval>();
+		if (!intervals.size()) return vector<Interval>();
 		sort(intervals.begin(), intervals.end(),\
 			[](const struct Interval &interv1, const struct Interval &interv2) {
 				return interv1.start < interv2.start; });

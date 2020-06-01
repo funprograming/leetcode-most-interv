@@ -56,12 +56,15 @@ private:
         while (first_right <= end && preorder[first_right] < root_val) {
             ++first_right;
         }
+		//条件1：
         for (int i = first_right; i <= end; ++i) {
             if (preorder[i] < root_val) {
                 return false;
             }
         }
+		//条件2：
         bool left = helper(preorder, start + 1, first_right - 1);
+		//条件3：
         bool right = helper(preorder, first_right, end);
         return left && right;
     }

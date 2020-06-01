@@ -40,6 +40,7 @@ Return false.
  */
 //complexity is O(N)
 class Solution {
+	bool isbalance=true;
 public:
     bool isBalanced(TreeNode* root) {
         maxDepth(root);
@@ -47,7 +48,6 @@ public:
         
     }
     int maxDepth(TreeNode* root) {
-        static bool isbalance=true;
         if(!root || !isbalance) return 0;
         int left = maxDepth(root->left);
         int right =  maxDepth(root->right);
@@ -57,9 +57,21 @@ public:
         } 
         else return 1+max(maxDepth(root->left),maxDepth(root->right));
     }
-    
 };
-
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        return isBalanced(root->left) 
+			&& isBalanced(root->right) 
+			&& abs(maxDepth(root->left) - maxDepth(root->right)) <= 1;      
+    }
+    int maxDepth(TreeNode* root) {
+        if(!root || !isbalance) return 0;
+        int left = maxDepth(root->left);
+        int right =  maxDepth(root->right);
+		return 1+max(maxDepth(root->left),maxDepth(root->right));
+    }  
+};
 class Solution {
 public:
 int dfsHeight (TreeNode *root) {

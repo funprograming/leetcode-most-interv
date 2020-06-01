@@ -1,8 +1,11 @@
 /* leetcode146. LRU Cache
-Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
-
-get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
+Design and implement a data structure for Least Recently Used (LRU) cache. 
+It should support the following operations: get and put.
+get(key) - Get the value (will always be positive) of the key if the key exists 
+in the cache, otherwise return -1.
+put(key, value) - Set or insert the value if the key is not already present. 
+When the cache reached its capacity, it should invalidate the least recently 
+used item before inserting a new item.
 
 The cache is initialized with a positive capacity.
 
@@ -41,7 +44,10 @@ public:
     
     int get(int key) {
         if (um.find(key) == um.end()) return -1;
-        li.splice(li.begin(), li, um[key]);
+        //li.splice(li.begin(), li, um[key]);
+        li.push_front(make_pair(key, um[key]->second));
+		li.erase(um[key]);
+		um[key] = li.begin();
         return um[key]->second;
     }
     
@@ -57,7 +63,8 @@ public:
             um.erase(delKey);
         }
         
-        li.emplace_front(key, value);
+        //li.emplace_front(key, value);
+		li.push_front(make_pair(key, value));
         um[key] = li.begin();
     }
 };

@@ -16,7 +16,8 @@ public:
         vector<string> arr;
         for (auto i : nums)
             arr.push_back(std::to_string(i));
-        sort(begin(arr), end(arr), [](string &s1, string &s2) { return s1 + s2>s2 + s1; });
+        //sort(begin(arr), end(arr), [](string &s1, string &s2) { return s1 + s2>s2 + s1; });
+		sort(arr.begin(), arr.end(), [](string &s1, string &s2) { return s1 + s2>s2 + s1; });
         string res;
         for (auto s : arr)
             res += s;

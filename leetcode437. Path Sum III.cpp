@@ -40,7 +40,7 @@ public:
         if(!root) return 0;
         return (root->val == sum ? 1 : 0)+\
                 pathSumFromHead(root->left,sum-root->val)+pathSumFromHead(root->right,sum-root->val);
-            }
+	}
     int pathSum(TreeNode* root, int sum) {
         if(!root) return 0;
         return pathSumFromHead(root,sum)+pathSum(root->left,sum)+pathSum(root->right,sum);

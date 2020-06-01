@@ -40,6 +40,7 @@ public:
     }
     
     void addNum(int num) {
+		// 大数放小堆
         if(maxq.empty()|| maxq.top()>num) maxq.push(num);
         else minq.push(num);
         if(maxq.size()>minq.size()+1){
@@ -51,7 +52,7 @@ public:
             minq.pop();           
         }
     }
-    
+
     double findMedian() {
         if(maxq.size() == minq.size()){
             return (minq.top()+maxq.top())/2.0;

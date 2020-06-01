@@ -13,7 +13,6 @@ Explanation: 342 + 465 = 807.
 
 */
 
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -25,6 +24,23 @@ Explanation: 342 + 465 = 807.
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+		#if 0
+		ListNode* node = new ListNode(0);
+		ListNode* head = node;
+		int i,j=0;
+		while(l1||l2){
+			i=0;
+			if(l1) {i+=l1->val,l1=l1->next;};
+			if(l2) {i+=l2->val,l2=l2->next;};
+			ListNode* l = new ListNode((j+i)%10);
+			j = (j+i)/10;
+			head->next = l;
+			head=head->next;
+			
+		}
+		if(j) head->next = new ListNode(j);
+		return node->next;        
+		#endif	
         ListNode* rst = new ListNode(0);
         ListNode* rsthead = rst;
         int sum = 0;

@@ -43,13 +43,20 @@ int LastRemaining_Solution1(unsigned int n, unsigned int m)
                 current = numbers.begin();
         }
 
-        list<int>::iterator next = ++ current;
+/*         list<int>::iterator next = ++ current;
         if(next == numbers.end())
             next = numbers.begin();
 
         -- current;
         numbers.erase(current);
-        current = next;
+		current = next;
+ */        
+        current = numbers.erase(current);
+		// erase: Return value
+		// Iterator following the last removed element. If the iterator pos refers to the last element, 
+		// the end() iterator is returned.
+		if(current == numbers.end())
+			current = numbers.begin();
     }
 
     return *(current);

@@ -49,7 +49,33 @@ void FindContinuousSequence(int sum)
         curSum += big;
     }
 }
+// way 2
+void FindContinuousSequence(int n, vector<vector<int>> &vv)
+{
+	int start = 0;
+	int end = 0;
+	int middle = (1 + n) / 2;
+	int sum = 0;
 
+	while (end <= middle)
+	{
+		if (sum <= n) {
+			end++;
+			sum += end;
+		}
+		else {
+			start++;
+			sum -= start;
+		}
+		if (sum == n) {
+			vector<int> v;
+			for (int i = start; i<end; i++) {
+				v.push_back(1 + i);
+			}
+			vv.push_back(v);
+		}
+	}
+}
 void PrintContinuousSequence(int small, int big)
 {
     for(int i = small; i <= big; ++ i)

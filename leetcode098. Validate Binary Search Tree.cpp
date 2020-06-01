@@ -39,6 +39,25 @@ public:
         if (root == nullptr) return true;
         stack<TreeNode*> stack;
         TreeNode *pre = nullptr;
+        while (true) {
+            while (root != nullptr) {
+             stack.push(root);
+             root = root->left;
+            }
+			if(stack.empty()) break;
+			root = stack.top();
+			if(pre != nullptr && root->val <= pre->val) return false;
+			stack.pop();
+			pre = root;
+			root = root->right;
+        }
+        return true;
+    }
+	/*
+	if (root == nullptr) return true;
+        stack<TreeNode*> stack;
+        //TreeNode *pre = nullptr;
+		long max_val = (long)INT_MIN-1;
         while (root != nullptr || !stack.empty()) {
             while (root != nullptr) {
              stack.push(root);
@@ -46,24 +65,42 @@ public:
             }
             root = stack.top();
             stack.pop();
-            if(pre != nullptr && root->val <= pre->val) return false;
-            pre = root;
+			if(root->val<=max_val) return false;
+			max_val = root->val;
+            //if(pre != nullptr && root->val <= pre->val) return false;
+            //pre = root;
             root = root->right;
         }
         return true;
     }
+	*/
 
 };
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        return isValidBST(root, NULL, NULL);
+        TreeNode* prev = nullptr;
+        return validate(root, prev);
     }
+    bool validate(TreeNode* node, TreeNode* &prev) {
+        if (node == nullptr) return true;
+        if (!validate(node->left, prev)) return false;
+        if (prev != nullptr && prev->val >= node->val) return false;
+        prev = node;
+		if (!validate(node->right, prev)) return false;
+        return true;
+    }
+};
 
-    bool isValidBST(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) {
-        if(!root) return true;
-        if(minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val)
-            return false;
-        return isValidBST(root->left, minNode, root) && isValidBST(root->right, root, maxNode);
+class Solution {
+	long max_val= (long)INT_MIN-1;
+public:
+    bool isValidBST(TreeNode* root) {
+		if(!root) return true;
+        if(!isValidBST(root->left))return false;
+		if(root->val<=max_val) return false;
+        max_val=root->val;
+		if(!isValidBST(root->right))return false;
+		return true;
     }
 };

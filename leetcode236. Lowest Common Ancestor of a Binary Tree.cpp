@@ -55,59 +55,45 @@ public:
 };
 
 class Solution {
-    //找节点的路径，保存到list中
-    //注：参数path是引用，因为path需要改变里面的内容，
-    bool GetNodePath(Node* pRoot,Node* pNode,list<Node*>& path)
+    public:
+    void GetNodePath(TreeNode* pRoot,TreeNode* pNode,list<TreeNode*>& path1,list<TreeNode*>& path)
     {
         if(pRoot == NULL || pNode == NULL)
-            return false;
-        path.push(pRoot);
-        if(pRoot == pNode)
-            return true;
-
-        bool found = false;
-        /*
-        //树的孩子放在一个vector中
-        vector<Node*>::iterator iter = pRoot->child.begin();
-        while(!found && iter  < pRoot->child.end())
-        {
-            found = GetNodePath(*iter, pNode,path);
-            ++iter;
-        }
-        if(!found)
-            path.pop_back();
-        */
-        //为方便测试，可以暂时将树特指为二叉树
-        found = GetNodePath(pRoot->left,pNode,path);
-        if(!found)
-            found = GetNodePath(pRoot->right,pNode,path);
-        //左右子树都找不到的话，该节点弹出
-        if(!found)
-            path.pop_back();
-        return found;
+            return;
+        path1.push_back(pRoot);
+        if(pRoot == pNode){
+			path = path1;
+			path.push_back(nullptr);
+		}
+		GetNodePath(pRoot->left,pNode,path1,path);
+		GetNodePath(pRoot->right,pNode,path1,path);
+		path1.pop_back();
     }
-
     //求两个链表的最后一个公共节点
-    Node *GetLastCommonNode(const list<Node*>& path1, const list<Node*>& path2)
+    TreeNode *GetLastCommonNode(const list<TreeNode*>& path1, const list<TreeNode*>& path2)
     {
         //从后往前找
-        list<Node*>::const_iterator it1 = path1.end();
-        list<Node*>::const_iterator it2 = path2.end();
-        while(--it1 != path1.begin() && --it2 != path2.begin())
+        list<TreeNode*>::const_iterator it1 = path1.begin();
+        list<TreeNode*>::const_iterator it2 = path2.begin();
+		list<TreeNode*>::const_iterator ret = path1.begin();
+		
+        while(it1 != path1.end() && it2 != path2.end())
         {
-            if(*it1 == *it2)
-                return *it1;
+            if(*it1 != *it2)
+                return *ret;
+			ret = it1;
+			it1++;
+			it2++;
         }
         return NULL;    
     }
 
-    Node* GetLastCommonParent(Node* pRoot,Node* pNode1,Node* pNode2)
-    {
-        list<Node*> path1;
-        GetNodePath(pRoot,pNode1,path1);
-        list<Node*> path2;
-        GetNodePath(pRoot,pNode2,path2);
+	TreeNode * lowestCommonAncestor(TreeNode * root, TreeNode * p, TreeNode * q){
+        list<TreeNode*> pathp,path1;
+        GetNodePath(root,p,path1,pathp);
+        list<TreeNode*> pathq,path2;
+        GetNodePath(root,q,path2,pathq);
 
-        return GetLastCommonNode(path1,path2);
+        return GetLastCommonNode(pathp,pathq);
     }
 };

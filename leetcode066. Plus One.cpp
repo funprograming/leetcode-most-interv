@@ -19,7 +19,7 @@ Explanation: The array represents the integer 4321.
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
-        int size = digits.size();
+		int size = digits.size();
         for(int i=size-1;i>=0;--i){
             if(digits[i]==9){
                 digits[i]=0;
@@ -29,9 +29,26 @@ public:
                 return digits;
             }
         }
+
         digits[0]=1;
         digits.push_back(0);
         return digits;
-        
+        /*
+		int size = digits.size();
+		int carry=0;
+		int k =digits[size-1]+1;
+		digits[size-1]=(k)%10;
+		carry=(k)/10;
+        for(int i=size-2;i>=0;--i){
+			int j= carry+digits[i];
+			digits[i]=j%10;
+			carry=j/10;
+        }
+		if(carry==1){
+			digits[0]=1;
+			digits.push_back(0);
+		}
+
+        return digits;*/
     }
 };

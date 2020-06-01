@@ -62,7 +62,6 @@ void ReplaceBlank(char str[], int length)
         -- indexOfOriginal;
     }
 }
-
 // ====================测试代码====================
 void Test(char* testName, char str[], int length, char expected[])
 {

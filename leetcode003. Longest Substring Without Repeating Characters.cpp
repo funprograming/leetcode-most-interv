@@ -46,6 +46,9 @@ public:
         
         int i,start=-1,ans=0;
         for(i=0;i<s.size();i++){
+			// tips:>0 在元素第3次出现时判断出错abcabcbb
+			//if(v[s[i]]>0){
+			// 表示前边出现重复元素的位置比start更近，必须更新start
             if(v[s[i]]>start){
                 start = v[s[i]];
             }

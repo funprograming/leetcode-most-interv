@@ -35,17 +35,16 @@ TreeNode* invertTree(TreeNode* root) {
 
 // iterative
 TreeNode* invertTree(TreeNode* root) {
+    if(!root) return root;
     std::stack<TreeNode*> stk;
     stk.push(root);
     
     while (!stk.empty()) {
         TreeNode* p = stk.top();
         stk.pop();
-        if (p) {
-            stk.push(p->left);
-            stk.push(p->right);
-            std::swap(p->left, p->right);
-        }
+        if (p->left) stk.push(p->left);
+        if (p->right) stk.push(p->right);
+        std::swap(p->left, p->right);
     }
     return root;
 }

@@ -1,4 +1,4 @@
-
+//题目：输入数字n，按顺序打印出从1最大的的n位数十进制数。比如输入3，则打印出1，2，3一直到最大的3位数即999。
 #include <cstdio>
 #include <memory>
 
@@ -25,7 +25,6 @@ void Print1ToMaxOfNDigits_1(int n)
 
 bool Increment(char* number)
 {
-	bool isOverflow = false;
 	int nTakeOver = 0;
 	int nLength = strlen(number);
 
@@ -35,25 +34,16 @@ bool Increment(char* number)
 		if (i == nLength - 1)
 			nSum++;
 
-		if (nSum >= 10)
-		{
-			if (i == 0)
-				isOverflow = true;
-			else
-			{
-				nSum -= 10;
-				nTakeOver = 1;
-				number[i] = '0' + nSum;
-			}
+		if (nSum >= 10 && i== 0){
+				return true;
 		}
-		else
-		{
-			number[i] = '0' + nSum;
-			break;
-		}
+
+		nSum = nSum % 10;
+		nTakeOver = nSum / 10;
+		number[i] = '0' + nSum;
 	}
 
-	return isOverflow;
+	return false;
 }
 
 void Print1ToMaxOfNDigits_2(int n)

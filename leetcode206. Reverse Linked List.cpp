@@ -32,6 +32,22 @@ public:
     }
 };
 
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+		if(!head) return head;
+        ListNode* head1 = head;
+		head = head->next;
+		head1->next=nullptr;
+        while(head){
+            ListNode* t = head->next;
+            head->next = head1;
+            head1 = head;
+            head = t;
+        }
+        return head1;
+    }
+};
 // Recursive
 class Solution {
 public:

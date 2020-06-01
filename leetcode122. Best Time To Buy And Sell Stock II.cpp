@@ -29,9 +29,31 @@ class Solution {
 public:
     int maxProfit(vector<int> &prices) {
         int maxprofit = 0;
-        for (int i = 1; i < prices.length; i++) {
+        for (int i = 1; i < prices.size(); i++) {
             if (prices[i] > prices[i - 1])
                 maxprofit += prices[i] - prices[i - 1];
         }
         return maxprofit;
+	}
+};
+
+class Solution {
+public:
+    int maxProfit(vector<int> &prices) {
+        if(!prices.size()) return 0;
+        int maxPro = 0;
+		int result = 0;
+        int start = prices[0];
+        for(int i = 1; i < prices.size(); i++){
+            start = min(start, prices[i]);
+			if(prices[i] - start > maxPro){
+				result += prices[i] - start;
+				start  = prices[i];
+				maxPro = 0;
+			}
+			else
+				maxPro = max(maxPro, prices[i] - start);
+        }
+        return result;
+    }
 };

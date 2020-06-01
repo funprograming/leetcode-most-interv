@@ -23,6 +23,8 @@ public:
         int xorret1 = 0;
         int xorret2 = 0;
 
+		// 我们只需要把数组中所有数字分成两组，并且每一组中的仅包含
+		// 一个单独数字，那么就把这个问题转化为基础问题了
         for(auto e:nums){
             if(e & xorret) xorret1 ^= e;
             else xorret2 ^= e;

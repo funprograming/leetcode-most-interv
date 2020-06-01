@@ -28,9 +28,7 @@ public:
                 return true;
             }
         }
-        if(nums.size()==us.size()){
-            return false;
-        }
+        return false;
     }
 };
 // way 2 set Time complexity: O(N), memory: O(N)

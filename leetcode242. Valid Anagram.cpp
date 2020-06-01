@@ -60,3 +60,4 @@ public:
 		return j == t.size() && i == s.size();
     }
 };
+unordered_multiset

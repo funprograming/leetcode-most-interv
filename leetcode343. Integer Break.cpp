@@ -1,5 +1,6 @@
 /* leetcode343. Integer Break
-Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.
+Given a positive integer n, break it into the sum of at least two positive integers and 
+maximize the product of those integers. Return the maximum product you can get.
 
 Example 1:
 
@@ -32,8 +33,8 @@ public:
                 int p = product[j]*product[i-j];
                 if(max<p)
                     max = p;
-                product[i] = max;    
             }
+			product[i] = max; 
         }
         return product[n];
     }

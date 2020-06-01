@@ -22,10 +22,12 @@ public:
     void wiggleSort(vector<int>& nums) {
     vector<int> sorted(nums);
     sort(sorted.begin(), sorted.end());
+	// 可避免相同元素被连续选取
     for (int i=nums.size()-1, j=0, k=i/2+1; i>=0; i--)
         nums[i] = sorted[i&1 ? k++ : j++];
     }
 };
+
 // way 2
 class Solution {
 public:

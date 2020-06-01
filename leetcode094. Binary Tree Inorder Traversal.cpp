@@ -29,9 +29,8 @@ private:
     vector<int> v;
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        if(!root) return vector<int>();
-        
-        inorderTraversal(root->left);
+		if(!root) return vector<int>();
+		inorderTraversal(root->left);
         v.push_back(root->val);
         inorderTraversal(root->right);
         return v;
@@ -42,17 +41,18 @@ public:
 class Solution {
 private:
     vector<int> v;
-    void golongleft(TreeNode* node){
+    void golongleft(TreeNode* node,stack<TreeNode*> &s){
         while(node){
             s.push(node);
             node = node->left;
         }
     }
 public:
+/*
     vector<int> inorderTraversal(TreeNode* root) {
         stack<TreeNode*> s;
         while(true){
-            golongleft(root);
+            golongleft(root,s);
             if(s.empty()) break;
             root = s.top();
             v.push_back(root->val);
@@ -61,4 +61,37 @@ public:
         }
         return v;
     }
+	*/
+	/*
+	vector<int> inorderTraversal(TreeNode* root) {
+		stack<TreeNode*> s;
+		while(true){
+			golongleft(root,s);
+			if(s.empty()) break;
+			while(!s.empty()){			
+				root = s.top();
+				v.push_back(root->val);
+				s.pop();
+				root = root->right;
+				if(root) break;
+			}
+		}
+		return v;
+	}
+	*/
+	vector<int> inorderTraversal(TreeNode* root) {
+		stack<TreeNode*> s;
+		while(root){
+			golongleft(root,s);
+			//if(s.empty()) break;
+			while(!s.empty()){			
+				root = s.top();
+				v.push_back(root->val);
+				s.pop();
+				root = root->right;
+				if(root) break;
+			}
+		}
+		return v;
+	}
 };

@@ -6,7 +6,7 @@
 #include <cstdio>
 #include "..\Utilities\StringUtil.h"
 #include <string.h>
-
+// way 1
 char* LeftRotateString(char* pStr, int n)
 {
     if(pStr != nullptr)
@@ -29,6 +29,22 @@ char* LeftRotateString(char* pStr, int n)
     }
 
     return pStr;
+}
+// way 2
+string LeftRotateString(string pStr, int n)
+{
+	int nLength = static_cast<int>(pStr.size());
+	pStr.resize(n + nLength);
+	for (int i = 0; i<n; ++i) {
+		pStr[nLength + i] = pStr[i];
+	}
+	int j = 0;
+	for (int i = n; i<n + nLength; ++i) {
+		pStr[j++] = pStr[i];
+	}
+	pStr.resize(nLength);
+
+	return pStr;
 }
 
 // ====================测试代码====================

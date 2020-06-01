@@ -17,18 +17,45 @@ The result can be in any order.
 
 class Solution {
 public:
-	vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         unordered_map<int, int> m;
 		for (int a : nums1) {
 			++m[a];
 		}
 		vector<int> res;
 		for (int a : nums2){
-            if (--m[a]>=0) {
+            if (m[a]>0) {
+				m.erase(a);
 				res.push_back(a);
 			}
         }
 
+		return res;
+	}
+};
+class Solution {
+public:
+	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+		unordered_set<int> m(nums1.begin(), nums1.end());
+		vector<int> res;
+		for (auto a : nums2)
+			if (m.count(a)) {
+				res.push_back(a);
+				m.erase(a);
+			}
+		return res;
+	}
+};
+
+class Solution {
+public:
+	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        set<int> s1(nums1.begin(),nums1.end()),s2(nums2.begin(),nums2.end());
+		vector<int> res;
+		for(auto e : s2){
+			if(s1.count(e)>0)
+				res.push_back(e);
+		}
 		return res;
 	}
 };

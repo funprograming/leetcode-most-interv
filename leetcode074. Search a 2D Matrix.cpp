@@ -27,21 +27,21 @@ Output: false
 // way 1 divide and conquer
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {		
         if(matrix.empty()){
             return false;
         }
-        int r = 0;
-        int c = matrix[0].size()-1;
-        while(r<matrix.size() && c>=0){
+        int r = matrix.size()-1;
+        int c = 0;
+        while(r>=0 && c<matrix[0].size()){
             if(matrix[r][c]==target){
                 return true;
             }
             else if(matrix[r][c]>target){
-                c--;
+                r--;
             }
             else{
-                r++;
+                c++;
             }
         }
         return false;
@@ -55,7 +55,7 @@ public:
             return false;
         }
         int m = matrix.size(), n = matrix[0].size();
-        int start = 0, end = m*n - 1;
+        int start = 0, end = m*n;
         while(start <= end){
             int mid = start + (end - start)/2;
             int e = matrix[mid/n][mid%n];

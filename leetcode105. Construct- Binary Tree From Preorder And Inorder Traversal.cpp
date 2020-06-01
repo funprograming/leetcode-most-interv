@@ -44,8 +44,8 @@ public:
         preorder_right.assign(preorder.begin()+i+1, preorder.end());
         inorder_right.assign(inorder.begin()+i+1, inorder.end());
         
-        root->left = preorder_left.size()>0 ? buildTree(preorder_left,inorder_left):nullptr;
-        root->right = preorder_right.size()>0 ? buildTree(preorder_right,inorder_right):nullptr;
+        root->left  = buildTree(preorder_left,inorder_left);
+        root->right = buildTree(preorder_right,inorder_right);
         return root;
     }
 };

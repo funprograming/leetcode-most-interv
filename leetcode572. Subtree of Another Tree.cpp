@@ -52,8 +52,8 @@ public:
     bool isSame(TreeNode *s, TreeNode *t)
     {
         // 剑指offer中只要有相同结构即可，此处 return条件需需改为 
-        // if (!s) return true; //遍历完subtree
-        // if(!t) return false; //未遍历完subtree，遍历tree
+        // if (!t) return true;
+        // if(!s) return false;
         if (!s && !t) return true;
         if (!s || !t) return false;
         if (s->val != t->val) return false;

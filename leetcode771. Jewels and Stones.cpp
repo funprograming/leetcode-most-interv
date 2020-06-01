@@ -17,10 +17,11 @@ using std::unordered_set;
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
-        int count=0;
+		int count=0;
         unordered_set<char> J_set(J.begin(),J.end());
         for(char elem:S){
-            if(J_set.count(elem)) count++;
+            //if(J_set.count(elem)) count++;
+			if(J_set.end()!=J_set.find(elem)) count++;
         }
         return count;
     }

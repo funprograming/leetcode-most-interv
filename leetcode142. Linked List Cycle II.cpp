@@ -32,7 +32,7 @@ public:
         if(!cycle) return nullptr;
 
         // slow and fast will meet after fast walk the first cycle
-        // which is 2(a+p) = a+s+p --> a = s-t
+        // which is 2(a+t) = a+s+t --> a = s-t
         // a is head1 to cycle p,s-t is slow pointer to the cycle p
         ListNode *head1 = head;
         while(head1!=slow){
